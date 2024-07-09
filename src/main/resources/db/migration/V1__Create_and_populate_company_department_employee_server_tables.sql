@@ -32,8 +32,8 @@ CREATE TABLE servers
     name        VARCHAR(255) NOT NULL,
     producer    VARCHAR(255) NOT NULL,
     ip          VARCHAR(255) NOT NULL,
-    ram         INT          NOT NULL,
-    ssd         INT          NOT NULL,
+    ram         INT          NOT NULL CHECK (ram >= 1),
+    ssd         INT          NOT NULL CHECK (ssd >= 1),
     employee_id UUID,
     CONSTRAINT fk_employee
         FOREIGN KEY (employee_id)

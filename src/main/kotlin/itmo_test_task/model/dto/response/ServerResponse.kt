@@ -4,6 +4,7 @@ import itmo_test_task.model.dto.base.BaseServer
 import java.util.*
 
 data class ServerResponse(
+    val id: UUID,
     override val name: String,
     override val producer: String,
     override val ip: String,

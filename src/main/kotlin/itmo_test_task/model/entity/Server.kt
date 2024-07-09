@@ -1,6 +1,7 @@
 package itmo_test_task.model.entity
 
 import jakarta.persistence.*
+import jakarta.validation.constraints.Min
 import java.util.*
 
 @Entity
@@ -13,7 +14,11 @@ class Server(
     var name: String,
     var producer: String,
     var ip: String,
+
+    @Min(1)
     var ram: Int,
+
+    @Min(1)
     var ssd: Int,
 
     @ManyToOne(fetch = FetchType.LAZY)
