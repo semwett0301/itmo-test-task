@@ -16,7 +16,7 @@ class Employee(
     @JoinColumn(name = "department_id")
     var department: Department? = null,
 
-    @OneToMany(mappedBy = "employee", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "employee", cascade = [CascadeType.ALL], fetch = FetchType.LAZY, orphanRemoval = true)
     var servers: MutableList<Server> = mutableListOf()
 ) {
     constructor() : this(UUID.randomUUID(), "")

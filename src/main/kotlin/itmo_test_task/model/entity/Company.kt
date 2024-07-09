@@ -12,7 +12,7 @@ class Company(
 
     var name: String,
 
-    @OneToMany(mappedBy = "company", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "company", cascade = [CascadeType.ALL], fetch = FetchType.LAZY, orphanRemoval = true)
     var departments: MutableList<Department> = mutableListOf()
 ) {
     constructor() : this(UUID.randomUUID(), "")

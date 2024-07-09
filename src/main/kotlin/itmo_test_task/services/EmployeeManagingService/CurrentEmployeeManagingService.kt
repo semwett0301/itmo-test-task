@@ -7,6 +7,7 @@ import itmo_test_task.repositories.CompanyRepository
 import itmo_test_task.repositories.EmployeeRepository
 import jakarta.persistence.EntityNotFoundException
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 import java.util.*
 
 @Service
@@ -20,8 +21,8 @@ class CurrentEmployeeManagingService(
 
         val departmentEmployeesAmount = employee.department?.employees?.size ?: 0
 
-        if (departmentEmployeesAmount - 1 > 0) {
-            employeeRepository.deleteById(id)
+        if (departmentEmployeesAmount > 1) {
+            employeeRepository.deleteById(employee.id)
         } else {
             throw IllegalArgumentException("employee with Id:$id can't be deleted ")
         }

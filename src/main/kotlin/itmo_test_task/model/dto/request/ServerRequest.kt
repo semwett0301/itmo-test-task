@@ -6,7 +6,7 @@ import org.springframework.validation.annotation.Validated
 import java.util.UUID
 
 @Validated
-data class CreateServerRequest(
+data class ServerRequest(
     override val name: String,
     override val producer: String,
     override val ip: String,
