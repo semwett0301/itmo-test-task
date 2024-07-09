@@ -1,12 +1,12 @@
 CREATE TABLE companies
 (
-    id   UUID PRIMARY KEY,
+    id   UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     name VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE departments
 (
-    id         UUID PRIMARY KEY,
+    id         UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     name       VARCHAR(255) NOT NULL,
     company_id UUID,
     CONSTRAINT fk_company
@@ -17,7 +17,7 @@ CREATE TABLE departments
 
 CREATE TABLE employees
 (
-    id            UUID PRIMARY KEY,
+    id            UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     name          VARCHAR(255) NOT NULL,
     department_id UUID,
     CONSTRAINT fk_department
@@ -28,7 +28,7 @@ CREATE TABLE employees
 
 CREATE TABLE servers
 (
-    id          UUID PRIMARY KEY,
+    id          UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     name        VARCHAR(255) NOT NULL,
     producer    VARCHAR(255) NOT NULL,
     ip          VARCHAR(255) NOT NULL,
