@@ -10,11 +10,11 @@ class Server(
     @GeneratedValue(strategy = GenerationType.AUTO)
     val id: UUID,
 
-    val name: String,
-    val producer: String,
-    val ip: String,
-    val ram: Int,
-    val ssd: Int,
+    var name: String,
+    var producer: String,
+    var ip: String,
+    var ram: Int,
+    var ssd: Int,
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "employee_id")

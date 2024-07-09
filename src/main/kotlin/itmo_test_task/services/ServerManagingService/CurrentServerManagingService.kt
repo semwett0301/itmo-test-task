@@ -14,11 +14,21 @@ import java.util.*
 @Service
 class CurrentServerManagingService(val serverRepository: ServerRepository, val departmentRepository: DepartmentRepository): ServerManagingService {
     override fun createServer(serverRequest: CreateServerRequest) {
-        TODO("Not yet implemented")
+        val server = ServerMapper.INSTANCE.toServer(serverRequest)
+        serverRepository.save(server)
     }
 
     override fun updateServer(serverRequest: UpdateServerRequest, serverId: UUID) {
-        TODO("Not yet implemented")
+        val server = serverRepository.findById(serverId)
+            .orElseThrow { EntityNotFoundException("server with Id:$serverId not found ") }
+
+        server.apply {
+            name = serverRequest.name ?: name
+            producer = serverRequest.producer ?: producer
+            ip = serverRequest.ip ?: ip
+            ram = serverRequest.ram ?: ram
+            ssd = serverRequest.ssd ?: ssd
+        }
     }
 
     override fun getServersByDepartmentId(departmentId: UUID): MutableList<ServerResponse> {

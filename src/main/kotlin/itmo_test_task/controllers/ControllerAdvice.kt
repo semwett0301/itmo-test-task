@@ -19,9 +19,14 @@ class ControllerAdvice {
         return ResponseEntity.status(404).body(ex.message)
     }
 
+    @ExceptionHandler(IllegalArgumentException::class)
+    fun notCorrectState(ex: IllegalArgumentException): ResponseEntity<String> {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.message)
+    }
+
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(
-        MethodArgumentNotValidException::class
+        value = [MethodArgumentNotValidException::class],
     )
     fun handleValidation(
         ex: MethodArgumentNotValidException

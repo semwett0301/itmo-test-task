@@ -15,7 +15,16 @@ class CurrentEmployeeManagingService(
     val employeeRepository: EmployeeRepository
 ) : EmployeeManagingService {
     override fun deleteEmployeeById(id: UUID) {
-        employeeRepository.deleteById(id)
+        val employee =
+            employeeRepository.findById(id).orElseThrow { EntityNotFoundException("employee with Id:$id not found ") }
+
+        val departmentEmployeesAmount = employee.department?.employees?.size ?: 0
+
+        if (departmentEmployeesAmount - 1 > 0) {
+            employeeRepository.deleteById(id)
+        } else {
+            throw IllegalArgumentException("employee with Id:$id can't be deleted ")
+        }
     }
 
     override fun getEmployeesByCompanyId(companyId: UUID): MutableList<EmployeeResponse> {
